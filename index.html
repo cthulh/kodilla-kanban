@@ -11,6 +11,31 @@
     <button class="create-column">Add a column</button>
     <div class="column-container"></div>
 	</div>
+  <!-- ______________________________________________________ -->
+  <!-- -->
+  <!-- Mustache templates: -->
+  <!-- -->
+  <!-- -->
+  <!-- 1. Column template  -->
+  <script id="column-template" type="x-tmpl-mustache">
+    <div class="column">
+        <h2 class="column-title">{{ name }}</h2>
+        <ul id={{ id }} class="column-card-list"></ul>
+        <button class="btn-delete">X</button>
+        <button class="add-card">Add a card</button>
+    </div>
+  </script>
+  <!-- -->
+  <!-- -->
+  <!-- 2. Card template  -->
+  <script id="card-template" type="x-tmpl-mustache">
+    <div class="card">
+      <p class="card-description">{{ description }}</p>
+      <button class="btn-delete">x</button>
+    </div
+  </script>
+  <!-- -->
+  <!-- -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.min.js"></script>
