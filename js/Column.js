@@ -1,9 +1,9 @@
 // Column constructor ______________________________________
-function Column(name) {
+function Column(id, name) {
   var self = this;
 
-  this.id = randomString();
-  this.name = name;
+  this.id = id;
+  this.name = name || 'No name given';
   this.element = generateTemplate('column-template', { name: this.name, id: this.id });
 
   this.element.querySelector('.column').addEventListener('click', function (event) {
@@ -13,11 +13,26 @@ function Column(name) {
 
     if (event.target.classList.contains('add-card')) {
       var cardName;
+      event.preventDefault();
       // prevent empty string names or cancellation leading to a new card
       while (!cardName){
         cardName = prompt('Enter the name of the card');
       }
-      self.addCard(new Card(cardName));
+      var data = new FormData();
+      data.append('name', cardName);
+      data.append('bootcamp_kanban_column_id', self.id);
+      fetch(params.baseUrl + '/card', {
+          method: 'POST',
+          headers: params.myHeaders,
+          body: data,
+        })
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(resp) {
+          var card = new Card(resp.id, cardName);
+          self.addCard(card);
+        });
     }
   });
 }
@@ -27,6 +42,13 @@ Column.prototype = {
     this.element.querySelector('ul').appendChild(card.element);
   },
   removeColumn: function() {
-    this.element.parentNode.removeChild(this.element);
+    var self = this;
+    fetch(params.baseUrl + '/column/' + self.id, { method: 'DELETE', headers: params.myHeaders })
+      .then(function(resp) {
+        return resp.json();
+      })
+      .then(function(resp) {
+        self.element.parentNode.removeChild(self.element);
+      });
   }
 }

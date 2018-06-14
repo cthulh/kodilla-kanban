@@ -14,6 +14,20 @@ document.querySelector('#board .create-column').addEventListener('click', functi
   while (!name){
     name = prompt('Enter a column name');
   }
-  var column = new Column(name);
-  board.addColumn(column);
+  var data = new FormData();
+
+  data.append('name', name);
+
+  fetch(params.baseUrl + '/column', {
+      method: 'POST',
+      headers: params.myHeaders,
+      body: data,
+    })
+    .then(function(resp) {
+      return resp.json();
+    })
+    .then(function(resp) {
+      var column = new Column(resp.id, name);
+      board.addColumn(column);
+    });
 });

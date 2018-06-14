@@ -2,20 +2,36 @@
 var params = {
   baseUrl: 'https://kodilla.com/pl/bootcamp-api',
   myHeaders: {
-    'X-Client-Id': 'X-Client-Id',
-    'X-Auth-Token': 'X-Auth-Token'
+    'X-Client-Id': '3315',
+    'X-Auth-Token': '8ca33a0b25d4db9d3806e1bc43c69b83'
   }
+}
+// Fetch board
+fetch(params.baseUrl + '/board', { headers: params.myHeaders })
+  .then(function(resp) {
+    return resp.json();
+  })
+  .then(function(resp) {
+    setupColumns(resp.columns);
+  });
+
+// Add columns to the board
+function setupColumns(columns) {
+  columns.forEach(function(column) {
+  	var col = new Column(column.id, column.name);
+      board.addColumn(col);
+      setupCards(col, column.cards);
+  });
 }
 
-// Random id generator ______________________________________
-function randomString() {
-  var chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ';
-  var str = '';
-  for (var i = 0; i < 10; i++) {
-      str += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return str;
+// Add cards to the relevant column (passed in)
+function setupCards(col, cards) {
+	cards.forEach(function (card) {
+    var cardObj = new Card(card.id, card.name);
+  	col.addCard(cardObj);
+	});
 }
+
 // Template generator ______________________________________
 function generateTemplate(name, data, basicElement) {
   var template = document.getElementById(name).innerHTML;
@@ -35,21 +51,3 @@ function initSortable(id) {
     sort: true
   });
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Setup of elements ______________________________________
-
-  // Columns
-  var todoColumn = new Column('To do');
-  var doingColumn = new Column('Doing');
-  var doneColumn = new Column('Done');
-  board.addColumn(todoColumn);
-  board.addColumn(doingColumn);
-  board.addColumn(doneColumn);
-
-  // Cards
-  todoColumn.addCard(new Card('New task'));
-  doingColumn.addCard(new Card('Create kanban boards'));
-  doneColumn.addCard(new Card('Done this thing'));
-
-});
