@@ -21,7 +21,7 @@
     <div class="column">
         <h2 class="column-title">{{ name }}</h2>
         <ul id={{ id }} class="column-card-list"></ul>
-        <button class="btn-delete">X</button>
+        <button class="btn-delete"> X </button>
         <button class="add-card">Add a card</button>
     </div>
   </script>
@@ -30,9 +30,10 @@
   <!-- 2. Card template  -->
   <script id="card-template" type="x-tmpl-mustache">
     <div class="card">
+      <h2> </h2>
       <p class="card-description">{{ description }}</p>
-      <button class="btn-delete">x</button>
-    </div
+      <button class="btn-delete">Delete card</button>
+    </div>
   </script>
   <!-- -->
   <!-- -->
