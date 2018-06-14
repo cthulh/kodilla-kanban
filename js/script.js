@@ -108,13 +108,17 @@
     // Setup of elements ______________________________________
 
     // Columns
-    board.addColumn(new Column('To do'));
-    board.addColumn(new Column('Doing'));
-    board.addColumn(new Column('Done'));
+    var todoColumn = new Column('To do');
+    var doingColumn = new Column('Doing');
+    var doneColumn = new Column('Done');
+    board.addColumn(todoColumn);
+    board.addColumn(doingColumn);
+    board.addColumn(doneColumn);
 
     // Cards
     todoColumn.addCard(new Card('New task'));
     doingColumn.addCard(new Card('Create kanban boards'));
+    doneColumn.addCard(new Card('Done this thing'));
 
   });
 }());

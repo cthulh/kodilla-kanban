@@ -1,0 +1,127 @@
+body {
+  background-color: #adccd3;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.board {
+  color: black;
+}
+
+.board h1 {
+  background-color: #69a2b0;
+  margin: 0;
+  padding: 2vh 2vh 5vh 2vh;
+}
+
+.board .column-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.board .column-container .column {
+  color: black;
+  -ms-flex: auto;
+      flex: auto;
+  position: relative;
+  border-radius: 5px;
+  width: 30vw;
+  margin: 1vw;
+  background-color: #6d7e85;
+}
+
+.board .column-container .column ul > li {
+  list-style-type: none;
+}
+
+.board .column-container .column .column-card-list {
+  min-height: 10vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.board .column-container .column .column-card-list .card {
+  color: black;
+  -ms-flex: auto;
+      flex: auto;
+  margin-bottom: 3vh;
+  position: relative;
+  max-width: 90%;
+  min-height: 5vh;
+  background-color: #8ee1d6;
+  border-radius: 5px;
+}
+
+.board .column-container .column .column-card-list .card h2 {
+  display: block;
+  border-radius: 5px 5px 0 0;
+  background-color: #75dbcd;
+  padding-top: 40px;
+  margin: 0;
+}
+
+.board .column-container .column .column-card-list .card p {
+  display: inline-block;
+  padding: 1vh;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.board .column-container .column .column-title {
+  display: block;
+  background-color: #95adb6;
+  border-radius: 5px 5px 0 0;
+  padding: 5px;
+  text-align: center;
+}
+
+.add-card, .create-column, .btn-delete {
+  padding: 2px 4px;
+}
+
+.add-card, .create-column {
+  background-color: #a1c084;
+  border: 1px solid #659157;
+  border-radius: 5px;
+  margin: 1vh;
+}
+
+.create-column, .btn-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btn-delete {
+  background-color: #e5717f;
+  border: 1px solid #e05263;
+  border-radius: 5px;
+  margin: 1vh;
+}
+
+@media screen and (max-width: 1000px) {
+  .board .column-container .column {
+    width: 45vw;
+    margin: 2vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .board .column-container {
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
+  .board .column-container .column {
+    width: 90vw;
+    margin: 3vw;
+  }
+}

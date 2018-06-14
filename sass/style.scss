@@ -1,0 +1,151 @@
+// Colors
+
+$body-bgcolor-primary: #adccd3;
+$board-header-bgcolor-dark: #69a2b0;
+$board-bgcolor-primary: #f9c784;
+$board-bgcolor-secondary: #e3b578;
+$board-color-font: black;
+$column-bgcolor-primary: #95adb6;
+$column-bgcolor-secondary: #6d7e85;
+$column-color-font: black;
+$column-bgcolor-btn-add-card-primary: #a1c084;
+$column-bgcolor-btn-add-card-secondary: #659157;
+$card-bgcolor-primary: #8ee1d6;
+$card-bgcolor-secondary: #75dbcd;
+$card-color-font: black;
+$btn-delete-color-primary: #e5717f;
+$btn-delete-color-secondary: #e05263;
+
+
+// Mixins
+@mixin border-radius($radius1, $radius2, $radius3, $radius4) {
+  -webkit-border-radius: $radius1 $radius2 $radius3 $radius4;
+     -moz-border-radius: $radius1 $radius2 $radius3 $radius4;
+      -ms-border-radius: $radius1 $radius2 $radius3 $radius4;
+          border-radius: $radius1 $radius2 $radius3 $radius4;
+}
+@mixin border-radius-all($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+// General settings
+body {
+  background-color: $body-bgcolor-primary;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.board {
+  color: $board-color-font;
+  h1 {
+    background-color: $board-header-bgcolor-dark;
+    margin: 0;
+    padding: 2vh 2vh 5vh 2vh;
+  }
+  .column-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .column {
+      color: $column-color-font;
+      flex: auto;
+      position: relative;
+      @include border-radius-all(5px);
+      width: 30vw;
+      margin: 1vw;
+      background-color: $column-bgcolor-secondary;
+      ul>li {
+        list-style-type: none;
+      }
+      .column-card-list {
+        min-height: 10vh;
+        display: flex;
+        flex-direction: column;
+        .card {
+          color: $card-color-font;
+          flex: auto;
+          margin-bottom: 3vh;
+          position: relative;
+          max-width: 90%;
+          min-height: 5vh;
+          background-color: $card-bgcolor-primary;
+          @include border-radius-all(5px);
+          h2 {
+            display: block;
+            @include border-radius(5px, 5px, 0, 0);
+            background-color: $card-bgcolor-secondary;
+            padding-top: 40px;
+            margin: 0;
+          }
+          p {
+            display: inline-block;
+            padding: 1vh;
+            text-align: center;
+            font-size: 1.1rem;
+          }
+        }
+      }
+      .column-title {
+        display: block;
+        background-color: $column-bgcolor-primary;
+        @include border-radius(5px, 5px, 0, 0);
+        padding: 5px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Buttons
+.add-card, .create-column, .btn-delete {
+  padding: 2px 4px;
+}
+
+.add-card, .create-column {
+  background-color: $column-bgcolor-btn-add-card-primary;
+  border: 1px solid $column-bgcolor-btn-add-card-secondary;
+  @include border-radius-all(5px);
+  margin: 1vh;
+}
+
+.create-column, .btn-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btn-delete {
+  background-color: $btn-delete-color-primary;
+  border: 1px solid $btn-delete-color-secondary;
+  @include border-radius-all(5px);
+  margin: 1vh;
+}
+
+
+// Media query
+
+@media screen and (max-width: 1000px) {
+  .board {
+    .column-container {
+      .column {
+        width: 45vw;
+        margin: 2vw;
+      }
+    }
+  }
+}
+@media screen and (max-width: 700px) {
+  .board {
+    .column-container {
+      flex-direction: column;
+      .column {
+        width: 90vw;
+        margin: 3vw;
+      }
+    }
+  }
+}
