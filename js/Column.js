@@ -10,7 +10,9 @@ function Column(id, name) {
     if (event.target.classList.contains('btn-delete')) {
       self.removeColumn();
     }
-
+    if (event.target.classList.contains('btn-rename')) {
+      self.renameColumn();
+    }
     if (event.target.classList.contains('add-card')) {
       var cardName;
       event.preventDefault();
@@ -50,5 +52,28 @@ Column.prototype = {
       .then(function(resp) {
         self.element.parentNode.removeChild(self.element);
       });
+  },
+  renameColumn: function() {
+    var self = this;
+    var newName;
+    while (!newName) {
+      newName = prompt('Enter a new column name');
+    }
+    var data = new FormData();
+
+    data.append('name', newName);
+
+    fetch(params.baseUrl + '/column/' + self.id, { method: 'PUT', headers: params.myHeaders, body: data })
+      .then(function(resp) {
+        return resp.json();
+      })
+      .catch(function(error) {
+        console.log('Error', error);
+      })
+      .then(function(resp) {
+        console.log(resp);
+        self.name = newName;
+        self.element.querySelector('.column-title').innerHTML = newName;
+      })
   }
 }

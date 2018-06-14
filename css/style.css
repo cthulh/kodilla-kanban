@@ -84,7 +84,7 @@ body {
   text-align: center;
 }
 
-.add-card, .create-column, .btn-delete {
+.add-card, .create-column, .btn-delete, .btn-rename {
   padding: 2px 4px;
 }
 
@@ -95,15 +95,29 @@ body {
   margin: 1vh;
 }
 
-.create-column, .btn-delete {
+.create-column, .btn-delete, .btn-rename {
   position: absolute;
   top: 0;
+}
+
+.create-column, .btn-delete {
   right: 0;
+}
+
+.btn-rename {
+  left: 0;
 }
 
 .btn-delete {
   background-color: #e5717f;
   border: 1px solid #e05263;
+  border-radius: 5px;
+  margin: 1vh;
+}
+
+.btn-rename {
+  background-color: #f9c784;
+  border: 1px solid #e3b578;
   border-radius: 5px;
   margin: 1vh;
 }

@@ -1,9 +1,6 @@
 // Colors
-
 $body-bgcolor-primary: #adccd3;
 $board-header-bgcolor-dark: #69a2b0;
-$board-bgcolor-primary: #f9c784;
-$board-bgcolor-secondary: #e3b578;
 $board-color-font: black;
 $column-bgcolor-primary: #95adb6;
 $column-bgcolor-secondary: #6d7e85;
@@ -15,7 +12,8 @@ $card-bgcolor-secondary: #75dbcd;
 $card-color-font: black;
 $btn-delete-color-primary: #e5717f;
 $btn-delete-color-secondary: #e05263;
-
+$btn-rename-bgcolor-primary: #f9c784;
+$btn-rename-bgcolor-secondary: #e3b578;
 
 // Mixins
 @mixin border-radius($radius1, $radius2, $radius3, $radius4) {
@@ -101,7 +99,7 @@ body {
 }
 
 // Buttons
-.add-card, .create-column, .btn-delete {
+.add-card, .create-column, .btn-delete, .btn-rename {
   padding: 2px 4px;
 }
 
@@ -112,10 +110,17 @@ body {
   margin: 1vh;
 }
 
-.create-column, .btn-delete {
+.create-column, .btn-delete, .btn-rename {
   position: absolute;
   top: 0;
+}
+
+.create-column, .btn-delete {
   right: 0;
+}
+
+.btn-rename {
+  left: 0;
 }
 
 .btn-delete {
@@ -125,9 +130,15 @@ body {
   margin: 1vh;
 }
 
+.btn-rename {
+  background-color: $btn-rename-bgcolor-primary;
+  border: 1px solid $btn-rename-bgcolor-secondary;
+  @include border-radius-all(5px);
+  margin: 1vh;
+}
+
 
 // Media query
-
 @media screen and (max-width: 1000px) {
   .board {
     .column-container {
