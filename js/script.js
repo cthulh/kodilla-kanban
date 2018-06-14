@@ -40,7 +40,11 @@
     };
     // Add column event
     document.querySelector('#board .create-column').addEventListener('click', function() {
-      var name = prompt('Enter a column name');
+      var name;
+      // prevent empty string names or cancellation leading to a new column
+      while (!name){
+        name = prompt('Enter a column name');
+      }
       var column = new Column(name);
       board.addColumn(column);
     });
@@ -59,7 +63,12 @@
         }
 
         if (event.target.classList.contains('add-card')) {
-          self.addCard(new Card(prompt("Enter the name of the card")));
+          var cardName;
+          // prevent empty string names or cancellation leading to a new card
+          while (!cardName){
+            cardName = prompt('Enter the name of the card');
+          }
+          self.addCard(new Card(cardName));
         }
       });
     }
