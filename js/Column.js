@@ -14,63 +14,68 @@ function Column(id, name) {
       self.renameColumn();
     }
     if (event.target.classList.contains('add-card')) {
-      var cardName;
-      event.preventDefault();
-      // prevent empty string names or cancellation leading to a new card
-      while (!cardName){
-        cardName = prompt('Enter the name of the card');
-      }
-      var data = new FormData();
-      data.append('name', cardName);
-      data.append('bootcamp_kanban_column_id', self.id);
-      fetch(params.baseUrl + '/card', {
-          method: 'POST',
-          headers: params.myHeaders,
-          body: data,
-        })
-        .then(function(res) {
-          return res.json();
-        })
-        .then(function(resp) {
-          var card = new Card(resp.id, cardName);
-          self.addCard(card);
-        });
+      self.addCard();
     }
   });
 }
 // Column prototype
 Column.prototype = {
-  addCard: function(card) {
-    this.element.querySelector('ul').appendChild(card.element);
+  addCard: function() {
+    var self = this;
+    var name;
+
+    while (!name){
+      name = prompt('Enter the name of the card');
+    }
+
+    const data = {
+      name,
+      bootcamp_kanban_column_id: self.id
+    }
+
+    axios({
+      url: params.baseUrl + '/card',
+      method: 'post',
+      headers: params.myHeaders,
+      data
+    })
+      .then( resp => {
+        var card = new Card(resp.data.id, name);
+        this.element.querySelector('ul').appendChild(card.element);
+      });
   },
   removeColumn: function() {
     var self = this;
-    fetch(params.baseUrl + '/column/' + self.id, { method: 'DELETE', headers: params.myHeaders })
-      .then(function(resp) {
-        return resp.json();
-      })
+
+    axios({
+      url: params.baseUrl + '/column/' + self.id,
+      method: 'delete',
+      headers: params.myHeaders
+    })
       .then(function(resp) {
         self.element.parentNode.removeChild(self.element);
       });
   },
   renameColumn: function() {
     var self = this;
+
     var newName;
     while (!newName) {
       newName = prompt('Enter a new column name');
     }
-    var data = new FormData();
-    data.append('name', newName);
 
-    fetch(params.baseUrl + '/column/' + self.id, { method: 'PUT', headers: params.myHeaders, body: data })
-      .then(function(resp) {
-        return resp.json();
-      })
-      .catch(function(error) {
-        console.log('Error', error);
-      })
-      .then(function(resp) {
-        console.log(resp);
+    const data = {
+      name: newName
+    }
+
+    axios({
+      url: params.baseUrl + '/column/' + self.id,
+      method: 'put',
+      headers: params.myHeaders,
+      data
+    })
+      .catch( error => console.log('Error', error))
+      .then( resp => {
         self.name = newName;
         self.element.querySelector('.column-title').innerHTML = newName;
       })
