@@ -39,7 +39,6 @@ function generateTemplate(name, data, basicElement) {
 
   Mustache.parse(template);
   element.innerHTML = Mustache.render(template, data);
-
   return element;
 }
 
@@ -48,6 +47,12 @@ function initSortable(id) {
   var el = document.getElementById(id);
   var sortable = Sortable.create(el, {
     group: 'kanban',
-    sort: true
+    sort: true,
+    onAdd: function (/**Event*/evt) {
+  		var itemEl = evt.item;  // dragged HTMLElement
+      itemEl.movedTo = itemEl.parentNode.id;
+      itemEl.movedFrom = evt.from.id;
+      console.log(itemEl);
+  	}
   });
 }

@@ -60,7 +60,6 @@ Column.prototype = {
       newName = prompt('Enter a new column name');
     }
     var data = new FormData();
-
     data.append('name', newName);
 
     fetch(params.baseUrl + '/column/' + self.id, { method: 'PUT', headers: params.myHeaders, body: data })
